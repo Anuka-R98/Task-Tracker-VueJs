@@ -1,7 +1,10 @@
 <template>
 
   <div class="container">
-   <Header title="Task Tracker"/> 
+   <Header @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask"/> 
+   <div v-show="showAddTask">
+     <AddTask @add-task="addTask" />
+   </div>
    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks"/>
   </div>
 
@@ -11,6 +14,7 @@
 //imports
 import Header from './components/Header'
 import Tasks from './components/Tasks'
+import AddTask from './components/AddTask'
 
 export default {
   name: 'App',
@@ -19,14 +23,22 @@ export default {
   components: {
     Header,
     Tasks,
+    AddTask,
   },
   //function that returns object
   data () {
     return {
-      tasks: []
+      tasks: [],
+      showAddTask: false,
     }
   },
   methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
+    addTask (task) {
+      this.tasks = [...this.tasks, task]
+    },
     deleteTask(id) {
       if (confirm('Are You Sure ?')) {
         this.tasks = this.tasks.filter((task) => task.id !== id)
@@ -110,36 +122,5 @@ body {
 .btn-block {
   display: block;
   width: 100%;
-}
-
-.form-control {
-  margin: 20px 0;
-}
-
-.form-control label {
-  display: block;
-}
-
-.form-control input {
-  width: 100%;
-  height: 40px;
-  margin: 5px;
-  padding: 3px 7px;
-  font-size: 17px;
-}
-
-.form-control-check {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.form-control-check label {
-  flex: 1;
-}
-
-.form-control-check input {
-  flex: 2;
-  height: 20px;
 }
 </style>
