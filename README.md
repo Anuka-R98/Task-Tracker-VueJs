@@ -1,6 +1,9 @@
-# task-tracker-vue
+#### Program Name :- Task Managiing Web Application 
+#### Status :- Completed
+#### Developed with :- Vue js, Nodejs, json server
+#### Features :- CRUD operations, Routing, REST api
+#### Goal :- To learn fundementals and concepts about Vue js
 
-#### Status :- Ongoing
 
 ## Project setup
 ```
